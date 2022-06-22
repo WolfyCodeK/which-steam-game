@@ -17,6 +17,7 @@ pauseLength = 0.75
 # get url of steam users games
 def get_url():
     username = input("Username: ", end="\n")
+    print("")
     url = "https://steamcommunity.com/id/" + username + "/games/?tab=all"
     
     return url
