@@ -15,14 +15,12 @@ unicodeValues = {
     "\\u00ae" : "®",
 }
 
+# thread sleep length
 pauseLength = 0.75
 
 # get url of steam users games
-def get_url():
-    username = input("Username: ")
-    print("")
+def get_url(username):
     url = "https://steamcommunity.com/id/" + username + "/games/?tab=all"
-    
     return url
 
 # check if file is empty
@@ -79,9 +77,12 @@ def collect_games_list(filename):
 validUserName = False
 
 # while the username entered has a corresponding profile
-while validUserName == False:
+while validUserName == False: 
+    username = input("Username: ")
+    print("")
+    
     # scrape data
-    allData = collect_all_data(get_url())
+    allData = collect_all_data(get_url(username))
     jsData = collect_js_data(allData)
     
     # store that data
@@ -90,9 +91,9 @@ while validUserName == False:
     
     # if the js data is empty, the username is invalid
     if is_file_empty(filename) == True:
-        print("> Invalid username")
+        print("> ({}) Invalid username".format(username))
         sleep(pauseLength)
-        print("> Please try again", end="\n")
+        print("> ({}) Please try again\n".format(username))
     else:
         validUserName = True
 
@@ -102,8 +103,32 @@ write_data(gamesList, "gamesList.txt")
 
 numOfgames = len(gamesList) - 1
 
-# randomly select 3 games for the user to play
-input("> Selected Games: {}, {}, {}".format(gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)]))
+# if there is at least 1 game in the users steam library
+if numOfgames >= 0:
+    validOption = False
+    # loop until wholeLibraryOption is a valid option
+    while validOption == False:
+        wholeLibraryOption = input("> ({}) Choose from whole library? y/n\n> ".format(username))
+        sleep(pauseLength)
+        
+        if wholeLibraryOption == "y":
+            # randomly select 3 games for the user to play from whole library
+            print("> ({}) Selected Games: {}, {}, {}".format(username, gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)]))
+           
+            validOption = True
+        elif wholeLibraryOption == "n":
+            limitedSelection = 0
+            while limitedSelection < 3 or limitedSelection > numOfgames:
+                limitedSelection = int(input("> ({}) Starting from highest playtime, how many games would you like to choose from (3-{})? \n> ".format(username, numOfgames)))
+            sleep(pauseLength)
+            # randomly select 3 games for the user to play from selection
+            print("> ({}) Selected Games: {}, {}, {}".format(username, gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)])) 
+            
+            validOption = True
+        else:
+            validOption = False
+else:
+    print("> ({}) No games were found".format(username))
+    sleep(pauseLength)
 
-print("> END OF PROGRAM")
-sleep(pauseLength)
+input("--- END OF PROGRAM ---")
