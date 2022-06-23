@@ -7,9 +7,9 @@ import re
 """  
 TO-DO
 1. find out why only logged in steam profile can be viewed
-2. find other codes to be replaced "\u2122"
 """
 
+# unicode values to be converted
 unicodeValues = {
     "\\u2122" : "™",
     "\\u00ae" : "®",
@@ -78,25 +78,31 @@ def collect_games_list(filename):
 #---Main---#
 validUserName = False
 
+# while the username entered has a corresponding profile
 while validUserName == False:
+    # scrape data
     allData = collect_all_data(get_url())
     jsData = collect_js_data(allData)
     
+    # store that data
     filename = "jsData.txt"
     write_data(jsData, "jsData.txt")
     
+    # if the js data is empty, the username is invalid
     if is_file_empty(filename) == True:
         print("> Invalid username")
         sleep(pauseLength)
         print("> Please try again", end="\n")
     else:
         validUserName = True
-    
+
+# store games list
 gamesList = collect_games_list("jsData.txt")
 write_data(gamesList, "gamesList.txt")
 
 numOfgames = len(gamesList) - 1
 
+# randomly select 3 games for the user to play
 input("> Selected Games: {}, {}, {}".format(gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)]))
 
 print("> END OF PROGRAM")
