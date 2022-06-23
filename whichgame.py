@@ -6,11 +6,14 @@ import re
 
 """  
 TO-DO
-1. def get_num_of_lines_in_file for 
-    randrange(0, get_num_of_lines_in_file(filename))
-2. find out why only logged in steam profile can be viewed
-3. find other codes to be replaced "\u2122"
+1. find out why only logged in steam profile can be viewed
+2. find other codes to be replaced "\u2122"
 """
+
+unicodeValues = {
+    "\\u2122" : "™",
+    "\\u00ae" : "®",
+}
 
 pauseLength = 0.75
 
@@ -54,7 +57,8 @@ def write_data(data, filename):
         file.write(data)
     elif type(data) == list:
         for elem in data:
-            elem = elem.replace('\\u2122', '')
+            for key in unicodeValues:
+                elem = elem.replace(key, unicodeValues[key])
             file.write(elem)
             file.write("\n")
             
@@ -91,8 +95,9 @@ while validUserName == False:
 gamesList = collect_games_list("jsData.txt")
 write_data(gamesList, "gamesList.txt")
 
-print("> Selected Games: {}, {}, {}".format(gamesList[randrange(0,100)], gamesList[randrange(0,100)], gamesList[randrange(0,100)]))
+numOfgames = len(gamesList) - 1
 
-sleep(pauseLength)
+input("> Selected Games: {}, {}, {}".format(gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)]))
+
 print("> END OF PROGRAM")
 sleep(pauseLength)
