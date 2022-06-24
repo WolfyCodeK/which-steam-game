@@ -74,8 +74,7 @@ validUserName = False
 
 # while the username entered has a corresponding profile
 while validUserName == False: 
-    username = input("Username: ")
-    print("")
+    username = input("> () Steam account username -> ")
     
     # scrape data
     allData = collect_all_data(get_url(username))
@@ -103,7 +102,7 @@ if numOfgames >= 0:
     validOption = False
     # loop until wholeLibraryOption is a valid option
     while validOption == False:
-        wholeLibraryOption = input("> ({}) Choose from whole library? y/n\n> ".format(username))
+        wholeLibraryOption = input("> ({}) Choose from whole library (y/n) -> ".format(username))
         sleep(pauseLength)
         
         if wholeLibraryOption == "y":
@@ -115,11 +114,11 @@ if numOfgames >= 0:
             limitedSelection = 0
             
             while limitedSelection < 3 or limitedSelection > numOfgames:
-                limitedSelection = int(input("> ({}) Starting from highest playtime, how many games would you like to choose from (3-{})? \n> ".format(username, numOfgames)))
+                limitedSelection = int(input("> ({}) Library selection size from (3-{}) -> ".format(username, numOfgames)))
                 
             sleep(pauseLength)
             # randomly select 3 games for the user to play from selection
-            print("> ({}) Selected Games: \n{}, \n{}, \n{}".format(username, gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)])) 
+            print("> ({}) Selected Games: |{}| |{}| |{}|".format(username, gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)])) 
             
             validOption = True
         else:
