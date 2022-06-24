@@ -1,13 +1,9 @@
+import os
 from random import randrange
 from time import sleep
 from bs4 import BeautifulSoup
 import requests
 import re
-
-"""  
-TO-DO
-1. find out why only logged in steam profile can be viewed
-"""
 
 # unicode values to be converted
 unicodeValues = {
@@ -99,7 +95,6 @@ while validUserName == False:
 
 # store games list
 gamesList = collect_games_list("jsData.txt")
-write_data(gamesList, "gamesList.txt")
 
 numOfgames = len(gamesList) - 1
 
@@ -132,3 +127,7 @@ else:
     sleep(pauseLength)
 
 input("--- END OF PROGRAM ---")
+
+# Delete files at the end
+if os.path.exists("jsData.txt"):
+  os.remove("jsData.txt")
