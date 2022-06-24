@@ -1,2 +1,2 @@
 # which-steam-game
-Chooses some steam games to play from your a users library
+Chooses some games to play your steam library
