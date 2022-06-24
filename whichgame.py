@@ -147,9 +147,3 @@ class GameChooser():
         games = re.findall(r'"name\":\"(.*?)\"', data)
         
         return games
-    
-#---Main---#
-gameChooser = GameChooser()
-gameChooser.find_games()
-
-input("--- END OF PROGRAM ---")
