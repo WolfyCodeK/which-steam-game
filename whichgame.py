@@ -1,9 +1,9 @@
-import os
 from random import randrange
 from time import sleep
 from bs4 import BeautifulSoup
 import requests
 import re
+import os
 
 # unicode values to be converted
 unicodeValues = {
@@ -113,8 +113,10 @@ if numOfgames >= 0:
             validOption = True
         elif wholeLibraryOption == "n":
             limitedSelection = 0
+            
             while limitedSelection < 3 or limitedSelection > numOfgames:
                 limitedSelection = int(input("> ({}) Starting from highest playtime, how many games would you like to choose from (3-{})? \n> ".format(username, numOfgames)))
+                
             sleep(pauseLength)
             # randomly select 3 games for the user to play from selection
             print("> ({}) Selected Games: {}, {}, {}".format(username, gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)])) 
