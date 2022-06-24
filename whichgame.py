@@ -108,7 +108,7 @@ if numOfgames >= 0:
         
         if wholeLibraryOption == "y":
             # randomly select 3 games for the user to play from whole library
-            print("> ({}) Selected Games: {}, {}, {}".format(username, gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)]))
+            print("> ({}) Selected Games: \n{} \n{} \n{}".format(username, gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)], gamesList[randrange(0,numOfgames)]))
            
             validOption = True
         elif wholeLibraryOption == "n":
@@ -119,7 +119,7 @@ if numOfgames >= 0:
                 
             sleep(pauseLength)
             # randomly select 3 games for the user to play from selection
-            print("> ({}) Selected Games: {}, {}, {}".format(username, gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)])) 
+            print("> ({}) Selected Games: \n{}, \n{}, \n{}".format(username, gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)], gamesList[randrange(0,limitedSelection)])) 
             
             validOption = True
         else:
