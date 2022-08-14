@@ -60,8 +60,8 @@ class GameChooser():
         selectedGames = [gamesList[randrange(0,limit)], gamesList[randrange(0,limit)], gamesList[randrange(0,limit)]]
         
         print("> ({}) Selected Games: |{}| |{}| |{}|".format(self.username, selectedGames[0], selectedGames[1], selectedGames[2]))
-        self.__write_data(selectedGames, "chosen-games.txt", True)
-
+        self.__write_data(selectedGames, "chosen-games.txt")
+    
     # list out game options given some user options
     def __games_options(self):
         # store games list

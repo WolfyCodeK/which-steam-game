@@ -1,3 +1,5 @@
 jsData.txt
 *.spec
 build/
+__pycache__/whichgame.cpython-310.pyc
+chosen-games.txt
